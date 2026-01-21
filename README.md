@@ -39,7 +39,3 @@ Application runs on:
 http://localhost:9090
 ## Author
 POOJITHA PONNALA
-
-http://localhost:8080
-👩‍💻 Author
-Poojitha Ponnala
