@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>URL Shortener</title>
+</head>
+<body>
+    <h2>URL Shortener</h2>
+
+    <input type="text" id="longUrl" placeholder="Enter long URL" size="50"/>
+    <br><br>
+
+    <button onclick="shortenUrl()">Shorten</button>
+
+    <p id="result"></p>
+
+    <script>
+        function shortenUrl() {
+            const url = document.getElementById("longUrl").value;
+
+            fetch(/api/shorten?originalUrl=${encodeURIComponent(url)}, {
+                method: 'POST'
+            })
+            .then(res => res.text())
+            .then(data => {
+                document.getElementById("result").innerHTML =
+                    "Short URL: <a href='/" + data + "' target='_blank'>"
+                    + window.location.origin + "/" + data + "</a>";
+            });
+        }
+    </script>
+</body>
+</html>
