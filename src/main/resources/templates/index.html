@@ -1,32 +1,86 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+    <meta charset="UTF-8">
     <title>URL Shortener</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f6f8;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            width: 350px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            text-align: center;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            margin: 15px 0;
+            border-radius: 5px;
+            border: 1px solid #ccc;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #0056b3;
+        }
+        .result {
+            margin-top: 15px;
+            word-break: break-all;
+        }
+    </style>
 </head>
+
 <body>
+
+<div class="container">
     <h2>URL Shortener</h2>
 
-    <input type="text" id="longUrl" placeholder="Enter long URL" size="50"/>
-    <br><br>
+    <input type="text" id="originalUrl" placeholder="Enter long URL" />
 
-    <button onclick="shortenUrl()">Shorten</button>
+    <button onclick="shortenUrl()">Shorten URL</button>
 
-    <p id="result"></p>
+    <div class="result" id="result"></div>
+</div>
 
-    <script>
-        function shortenUrl() {
-            const url = document.getElementById("longUrl").value;
+<script>
+    function shortenUrl() {
+        const url = document.getElementById("originalUrl").value;
 
-            fetch(/api/shorten?originalUrl=${encodeURIComponent(url)}, {
-                method: 'POST'
-            })
-            .then(res => res.text())
-            .then(data => {
-                document.getElementById("result").innerHTML =
-                    "Short URL: <a href='/" + data + "' target='_blank'>"
-                    + window.location.origin + "/" + data + "</a>";
-            });
-        }
-    </script>
+        fetch("/api/shorten", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({ originalUrl: url })
+        })
+        .then(response => response.text())
+        .then(shortUrl => {
+            document.getElementById("result").innerHTML =
+                <p>Short URL:</p><a href="${shortUrl}" target="_blank">${shortUrl}</a>;
+        })
+        .catch(error => {
+            document.getElementById("result").innerText = "Error shortening URL";
+        });
+    }
+</script>
+
 </body>
 </html>
