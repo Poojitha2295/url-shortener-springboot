@@ -84,9 +84,6 @@ Register
 - 👥 Role-based access
 
 
-## Live Demo:
-https://url-shortener-springboot.onrender.com
-
 ## Author:
 Ponnala Poojitha  
 
