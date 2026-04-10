@@ -1,89 +1,108 @@
-🔗 URL Shortener Application (Spring Boot)
+# 🚀 URL Shortener - Spring Boot
 
-🚀 Overview
+A simple and efficient URL Shortener service built using Spring Boot. This project converts long URLs into short, shareable links and redirects users to the original URL.
 
-A backend application that converts long URLs into short links and redirects users efficiently.
-Enhanced with JWT-based authentication to secure APIs and simulate real-world backend systems.
+---
 
+## 📌 Features
 
+- 🔗 Convert long URLs into short URLs
+- 🔄 Redirect short URL to original URL
+- ⚡ RESTful API architecture
+- 🧩 Clean layered structure (Controller → Service)
+- 🚫 No authentication (public API for simplicity)
 
-✨ Features
+---
 
-- 🔗 Shorten long URLs
-- 🔁 Redirect to original URL
-- 👤 User Registration & Login
-- 🔐 JWT Authentication & Authorization
-- 🛡️ Secured APIs using token
-- ⚡ RESTful API design
+## 🛠️ Tech Stack
 
+- Java 17+
+- Spring Boot
+- Spring Web (REST APIs)
+- Maven
 
-🛠️ Tech Stack
+---
 
-- Backend: Spring Boot
-- Language: Java
-- Database: H2 Database
-- Security: Spring Security + JWT
-- API Testing: Postman
+## 📂 Project Structure
 
+src/main/java/com/example/urlshortener
 
-🔐 Authentication
+├── controller        # Handles HTTP requests (REST APIs)  
+├── service           # Business logic layer  
+├── dto               # Request/Response models  
+└── UrlShortenerApplication.java  
 
-- Implemented JWT (JSON Web Token) for secure API access
-- Stateless authentication (no sessions stored)
-- Token passed in headers:
+---
 
-Authorization: Bearer <your_token>
+## 🌐 API Endpoints
 
+### 1️⃣ Create Short URL
 
-📌 API Endpoints
+POST /api/shorten
 
-🔹 Auth APIs
-
-- "POST /auth/register" → Register new user
-- "POST /auth/login" → Login & get JWT token
-
-🔹 URL APIs
-
-- "POST /shorten" → Generate short URL
-- "GET /{shortUrl}" → Redirect to original URL
-
-🔹 Secure API
-
-- "GET /auth/secure" → Access only with token
-
-
-▶️ How to Run
-
-1. Clone the repository
-
-git clone https://github.com/your-username/url-shortener.git
-
-2. Open in IDE (Eclipse/IntelliJ)
-
-3. Run Spring Boot application
-
-4. Test APIs using Postman
-
-
-🧪 Sample Request
-
-Register
-
+Request:
 {
-  "username": "poojitha",
-  "password": "1234"
+  "longUrl": "https://www.google.com"
 }
 
+Response:
+abc123
 
+---
 
-📈 Future Enhancements
+### 2️⃣ Redirect to Original URL
 
-- 🔐 Password encryption (BCrypt)
-- 📊 Click analytics
-- 🗄️ MySQL integration
-- 👥 Role-based access
+GET /api/{shortUrl}
 
+Example:
+GET /api/abc123
 
-## Author:
-Ponnala Poojitha  
+Redirects to:
+https://www.google.com
 
+---
+
+## ▶️ How to Run Locally
+
+1. Clone repository  
+git clone https://github.com/Poojitha2295/url-shortener-springboot.git  
+
+2. Go to project folder  
+cd url-shortener-springboot  
+
+3. Build project  
+mvn clean install  
+
+4. Run application  
+mvn spring-boot:run  
+
+---
+
+## ☁️ Deployment
+
+This project can be deployed using:
+- Railway  
+- Render  
+- AWS EC2  
+- Heroku  
+
+---
+
+## 📈 Future Improvements
+
+- Add PostgreSQL/MySQL database  
+- Add click analytics tracking  
+- Add expiry time for URLs  
+- Add custom alias support  
+- Add JWT authentication (advanced version)
+
+---
+
+## 👩‍💻 Author
+
+Poojitha Ponnala  
+GitHub: https://github.com/Poojitha2295/url-shortener-springboot  
+---
+## 🔐 Authentication (Optional / Removed)
+JWT authentication was initially implemented to secure APIs. However, it was later removed to simplify deployment and ensure stable functionality of the URL shortener service.
+Future versions may include full JWT-based authentication for user-specific URL management.
